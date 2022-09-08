@@ -1,5 +1,5 @@
 # MicronautJava
 MicronautJava
 ```
-./gradle run
+./gradlew run
 ```
