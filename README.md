@@ -1,2 +1,5 @@
 # MicronautJava
 MicronautJava
+```
+./gradle run
+```
