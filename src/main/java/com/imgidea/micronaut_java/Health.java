@@ -9,14 +9,11 @@ import org.slf4j.LoggerFactory;
 public class Health {
 
     private static Logger logger = LoggerFactory.getLogger(Health.class);
-
     @Get("/health")
     public String health() {
-        logger.info("health endpoint");
+        logger.info("Endpoint: /health");
         return "{\"Status\": \"Ok\"}";
     }
-
     public static void main(String[] args) {
-        Micronaut.run(Application.class, args);
     }
 }
