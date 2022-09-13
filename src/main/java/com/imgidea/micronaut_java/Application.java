@@ -11,8 +11,8 @@ import io.swagger.v3.oas.annotations.info.*;
 
 @OpenAPIDefinition(
         info = @Info(
-                title = "demo",
-                version = "0.0"
+                title = "MicronautJava",
+                version = "0.1"
         )
 )
 @Controller("/")
