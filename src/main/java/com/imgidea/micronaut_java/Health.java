@@ -1,7 +1,7 @@
 package com.imgidea.micronaut_java;
 
-import io.micronaut.runtime.Micronaut;
-import io.micronaut.http.annotation.*;
+import io.micronaut.http.annotation.Get;
+import io.micronaut.http.annotation.Controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
