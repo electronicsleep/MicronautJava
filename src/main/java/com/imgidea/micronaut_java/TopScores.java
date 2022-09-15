@@ -17,6 +17,13 @@ public class TopScores {
         if (verbose.isPresent()) {
             logger.info("Endpoint: /top verbose: " + verbose);
         }
+        try {
+            Integer.parseInt(score);
+            logger.info("found an int");
+        } catch (NumberFormatException ex) {
+            logger.info("not an int");
+            return "{\"error\": \"not a number\"}";
+        }
         return "{\""+name+"\": \""+score+"\"}";
     }
     public static void main(String[] args) {
