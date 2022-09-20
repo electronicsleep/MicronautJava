@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 @Controller("/")
 public class TopScores {
 
-
     private static Logger logger = LoggerFactory.getLogger(TopScores.class);
     @Get("/top-score")
     public String topScore(@QueryValue String name, @QueryValue String score, @QueryValue Optional<String> verbose) {
@@ -33,13 +32,13 @@ public class TopScores {
     }
 
     @Post("/top-score")
-    public String topScore(@Body String json_body) {
-            logger.info("Endpoint: /top-score-post json_body " + json_body);
+    public String topScore(@Body String jsonBody) {
+            logger.info("Endpoint: /top-score-post jsonBody " + jsonBody);
             ObjectMapper mapper = new ObjectMapper();
             ScoreData scoreData = new ScoreData();
         try {
             //Convert from Json to Data Object
-            scoreData = mapper.readValue(json_body, ScoreData.class);
+            scoreData = mapper.readValue(jsonBody, ScoreData.class);
             //Convert from Data Object to Json
             String jsonString = mapper.writeValueAsString(scoreData);
             logger.info("Endpoint: /top-score-post jsonString: " + jsonString);
@@ -48,6 +47,6 @@ public class TopScores {
         }
         logger.info("Endpoint: /top-score-post scoreData.name " + scoreData.name);
         logger.info("Endpoint: /top-score-post scoreData.score " + scoreData.score);
-        return json_body;
+        return jsonBody;
     }
 }
