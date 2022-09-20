@@ -38,8 +38,11 @@ public class TopScores {
             ObjectMapper mapper = new ObjectMapper();
             ScoreData scoreData = new ScoreData();
         try {
+            //Convert from Json to Data Object
             scoreData = mapper.readValue(json_body, ScoreData.class);
-            //jsonString = mapper.writeValueAsString(eventsList);
+            //Convert from Data Object to Json
+            String jsonString = mapper.writeValueAsString(scoreData);
+            logger.info("Endpoint: /top-score-post jsonString: " + jsonString);
         } catch (Exception e) {
             e.printStackTrace();
         }
