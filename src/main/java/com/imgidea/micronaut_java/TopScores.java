@@ -1,31 +1,50 @@
 package com.imgidea.micronaut_java;
 
 import io.micronaut.http.annotation.Get;
+import io.micronaut.http.annotation.Post;
+import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.QueryValue;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
 @Controller("/")
 public class TopScores {
 
-    private static Logger logger = LoggerFactory.getLogger(Health.class);
+
+    private static Logger logger = LoggerFactory.getLogger(TopScores.class);
     @Get("/top-score")
-    public String topScores(@QueryValue String name, @QueryValue String score, @QueryValue Optional<String> verbose) {
-        logger.info("Endpoint: /top-score name: " + name + " score: " + score + " verbose: " + verbose);
+    public String topScore(@QueryValue String name, @QueryValue String score, @QueryValue Optional<String> verbose) {
+        logger.info("Endpoint: /top-score-get name: " + name + " score: " + score + " verbose: " + verbose);
         if (verbose.isPresent()) {
-            logger.info("Endpoint: /top verbose: " + verbose);
+            logger.info("Endpoint: /top-score-get verbose: " + verbose);
         }
         try {
             Integer.parseInt(score);
-            logger.info("found an int");
+            logger.info("Endpoint: /top-score-get found an int");
         } catch (NumberFormatException ex) {
-            logger.info("not an int");
+            logger.info("Endpoint: /top-score-get not an int");
             return "{\"error\": \"not a number\"}";
         }
         return "{\""+name+"\": \""+score+"\"}";
     }
-    public static void main(String[] args) {
+
+    @Post("/top-score")
+    public String topScore(@Body String json_body) {
+            logger.info("Endpoint: /top-score-post json_body " + json_body);
+            ObjectMapper mapper = new ObjectMapper();
+            ScoreData scoreData = new ScoreData();
+        try {
+            scoreData = mapper.readValue(json_body, ScoreData.class);
+            //jsonString = mapper.writeValueAsString(eventsList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        logger.info("Endpoint: /top-score-post scoreData.name " + scoreData.name);
+        logger.info("Endpoint: /top-score-post scoreData.score " + scoreData.score);
+        return json_body;
     }
 }

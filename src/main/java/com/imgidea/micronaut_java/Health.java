@@ -11,7 +11,7 @@ public class Health {
     private static Logger logger = LoggerFactory.getLogger(Health.class);
     @Get("/health")
     public String health() {
-        logger.info("Endpoint: /health");
+        //logger.info("Endpoint: /health");
         return "{\"Status\": \"Ok\"}";
     }
     public static void main(String[] args) {
