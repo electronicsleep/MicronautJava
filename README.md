@@ -1,5 +1,12 @@
 # MicronautJava
 ```
+
+Setup
+```
+brew install java11
+brew install gradle
+```
+
 ./gradlew run
 curl localhost:8080
 curl localhost:8080/health

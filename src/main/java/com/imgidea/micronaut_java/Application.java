@@ -22,7 +22,7 @@ public class Application {
 
     @Get("/")
     public HttpResponse index() {
-        logger.info("Endpoint: /");
+        //logger.info("Endpoint: /");
         return HttpResponse.ok().body("{\"Status\": \"MicronautJava\"}");
     }
 

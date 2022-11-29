@@ -22,6 +22,8 @@ dependencies {
     implementation("io.swagger.core.v3:swagger-annotations")
     implementation("jakarta.annotation:jakarta.annotation-api")
 
+    implementation("mysql:mysql-connector-java:8.0.16")
+
     runtimeOnly("ch.qos.logback:logback-classic")
 }
 
