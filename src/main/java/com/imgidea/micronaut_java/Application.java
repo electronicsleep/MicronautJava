@@ -1,8 +1,8 @@
 package com.imgidea.micronaut_java;
 
-import io.micronaut.http.MediaType;
 import io.micronaut.runtime.Micronaut;
 import io.micronaut.http.annotation.*;
+import io.micronaut.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,9 +21,9 @@ public class Application {
     private static Logger logger = LoggerFactory.getLogger(Application.class);
 
     @Get("/")
-    public String index() {
+    public HttpResponse index() {
         logger.info("Endpoint: /");
-        return "{\"Status\": \"MicronautJava\"}";
+        return HttpResponse.ok().body("{\"Status\": \"MicronautJava\"}");
     }
 
     public static void main(String[] args) {

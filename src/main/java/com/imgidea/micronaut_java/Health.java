@@ -1,7 +1,9 @@
 package com.imgidea.micronaut_java;
+import static com.imgidea.micronaut_java.Constants.*;
 
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Controller;
+import io.micronaut.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,9 +12,9 @@ public class Health {
 
     private static Logger logger = LoggerFactory.getLogger(Health.class);
     @Get("/health")
-    public String health() {
+    public HttpResponse health() {
         //logger.info("Endpoint: /health");
-        return "{\"Status\": \"Ok\"}";
+        return HttpResponse.ok().body(HEALTH);
     }
     public static void main(String[] args) {
     }
