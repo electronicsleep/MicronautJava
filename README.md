@@ -6,9 +6,15 @@ brew install java11
 brew install gradle
 ```
 
+Run
+```
 ./gradlew run
 curl localhost:8080
 curl localhost:8080/health
+```
+
+Tests
+```
 bash src/test/curl-tests.sh
 bash src/test/pytest.sh
 ```
