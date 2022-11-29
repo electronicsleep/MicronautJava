@@ -1,5 +1,4 @@
 # MicronautJava
-```
 
 Setup
 ```
@@ -10,6 +9,8 @@ brew install gradle
 ./gradlew run
 curl localhost:8080
 curl localhost:8080/health
+bash src/test/curl-tests.sh
+bash src/test/pytest.sh
 ```
 http://localhost:8080/swagger-ui
 
