@@ -16,7 +16,7 @@ public class TextHtml {
     @Get("/text-html/{name}")
     @Produces(MediaType.TEXT_HTML)
     public HttpResponse TextHtml(String name) {
-        String html = HTML_HEADER + HEADER_LINKS + ABOUT + name;
+        String html = HTML_HEADER + HEADER_LINKS + ABOUT + " Name: " + name;
         logger.info("Endpoint: /text-html/" + name);
         return HttpResponse.ok().body(html);
     }

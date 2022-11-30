@@ -18,8 +18,8 @@ public class TopScore {
 
     private static Logger logger = LoggerFactory.getLogger(TopScore.class);
     @Get("/top-score")
-    public HttpResponse TopScore(HttpRequest request, @QueryValue Optional<String> service, @QueryValue Optional<String> search ) {
-        logger.info("Endpoint: /top-score service " + service + " search " + search);
+    public HttpResponse TopScore(HttpRequest request, Optional<String> search ) {
+        logger.info("Endpoint: /top-score search " + search);
 
         ScoreRepo scoreRepo = new ScoreRepo();
         List<ScoreData> scoreData;
