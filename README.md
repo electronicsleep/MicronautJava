@@ -1,5 +1,7 @@
 # MicronautJava
 
+MicronautJava is a simple top score REST API/APP will write name/score to a SQL database, it's an example project to show Micronaut with pytest.
+
 Setup
 ```
 brew install java11
