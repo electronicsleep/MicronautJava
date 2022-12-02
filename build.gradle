@@ -19,8 +19,9 @@ dependencies {
     implementation("jakarta.annotation:jakarta.annotation-api")
     implementation("io.micronaut:micronaut-validation")
 
-    implementation("io.swagger.core.v3:swagger-annotations")
-    implementation("jakarta.annotation:jakarta.annotation-api")
+    //Disable Swagger
+    //implementation("io.swagger.core.v3:swagger-annotations")
+    //implementation("jakarta.annotation:jakarta.annotation-api")
 
     implementation("mysql:mysql-connector-java:8.0.16")
 

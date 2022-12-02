@@ -6,6 +6,7 @@ import io.micronaut.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/* Disable Swagger
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.info.*;
 
@@ -15,6 +16,7 @@ import io.swagger.v3.oas.annotations.info.*;
                 version = "0.1"
         )
 )
+*/
 @Controller("/")
 public class Application {
 
