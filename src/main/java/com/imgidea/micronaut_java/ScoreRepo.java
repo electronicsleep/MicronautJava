@@ -97,7 +97,7 @@ public class ScoreRepo {
                 //logger.debug("Database connected");
                 Statement statement = null;
                 statement = connection.createStatement();
-                String query = "SELECT * FROM topscore ORDER BY score LIMIT 100";
+                String query = "SELECT * FROM topscore ORDER BY score DESC, datetime DESC LIMIT 100";
                 //logger.debug("query: " + query);
                 ResultSet rs = statement.executeQuery(query);
 
@@ -138,7 +138,7 @@ public class ScoreRepo {
                 //logger.debug("Database connected");
                 String query = "SELECT * FROM topscore where name LIKE ? OR score LIKE ? ORDER BY score LIMIT 100";
                 search = "%" + search + "%";
-                //logger.info("DEBUG query" + query);
+                //logger.debug("DEBUG query" + query);
                 stmt = connection.prepareStatement(query);
                 stmt.setString(1, search);
                 stmt.setString(2, search);
