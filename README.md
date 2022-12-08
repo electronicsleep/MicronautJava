@@ -27,9 +27,8 @@ Run
 ./gradlew run
 curl localhost:8080
 curl localhost:8080/health
+curl localhost:8080/top-score | jq .
 ```
-http://localhost:8080/swagger-ui
-
 
 Tests
 ```
