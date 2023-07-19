@@ -21,7 +21,7 @@ public class TopScore {
         logger.info("Endpoint: /top-score search " + search);
 
         ScoreRepo scoreRepo = new ScoreRepo();
-        List<ScoreData> scoreData;
+        List<ScoreDto> scoreDto;
 
         if (search.isPresent()) {
             scoreData = scoreRepo.SearchScores(search.get());
@@ -34,7 +34,7 @@ public class TopScore {
         String jsonString = "";
         try {
             //Convert from Data Object to Json
-            jsonString = mapper.writeValueAsString(scoreData);
+            jsonString = mapper.writeValueAsString(scoreDto);
             logger.info("Endpoint: /top-score get jsonString: " + jsonString);
         } catch (Exception e) {
             e.printStackTrace();
