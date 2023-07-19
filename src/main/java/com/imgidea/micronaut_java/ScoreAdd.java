@@ -21,10 +21,10 @@ public class ScoreAdd {
     public HttpResponse scoreAdd(HttpRequest request, @Body String jsonBody) {
         logger.info("Endpoint: /add-score post jsonBody " + jsonBody);
         ObjectMapper mapper = new ObjectMapper();
-        ScoreData scoreData = new ScoreData();
+        ScoreDto scoreDto = new ScoreDto();
         try {
             //Convert from Json to Data Object
-            scoreData = mapper.readValue(jsonBody, ScoreData.class);
+            scoreDto = mapper.readValue(jsonBody, ScoreDto.class);
             //Convert from Data Object to Json
             //String jsonString = mapper.writeValueAsString(scoreData);
             //logger.debug("Endpoint: /add-score post jsonString: " + jsonString);
@@ -35,10 +35,10 @@ public class ScoreAdd {
         }
 
         ScoreRepo scoreRepo = new ScoreRepo();
-        scoreRepo.ScoreAdd(scoreData.name, scoreData.score, scoreData.datetime);
+        scoreRepo.ScoreAdd(scoreDto.name, scoreDto.score, scoreDto.datetime);
 
-        logger.info("Endpoint: /add-score post scoreData.name " + scoreData.name);
-        logger.info("Endpoint: /add-score post scoreData.score " + scoreData.score);
+        logger.info("Endpoint: /add-score post scoreDto.name " + scoreDto.name);
+        logger.info("Endpoint: /add-score post scoreDto.score " + scoreDto.score);
         String body = "{\"AddScore\": \"Ok\"}";
         return HttpResponse.ok().body(body);
     }

@@ -36,6 +36,10 @@ bash src/test/curl-tests.sh
 bash src/test/pytest.sh
 ```
 
+# Swagger
+
+http://localhost:8080/swagger-ui
+
 # Micronaut
 
 https://micronaut.io/

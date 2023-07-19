@@ -85,10 +85,10 @@ public class ScoreRepo {
         return result;
     }
 
-    public List<ScoreData> SelectScores() {
+    public List<ScoreDto> SelectScores() {
         //logger.debug("SelectScores");
 
-        List<ScoreData> scoreData = new ArrayList<>();
+        List<ScoreDto> scoreData = new ArrayList<>();
 
         if (datasource_connection != null) {
             //logger.debug("Connecting database...");
@@ -108,7 +108,7 @@ public class ScoreRepo {
                     String score = rs.getString("score");
                     Date datetime = rs.getTimestamp("datetime");
                     String datetime2 = datetime.toString();
-                    scoreData.add(new ScoreData(topscore_id, name, score, datetime2));
+                    scoreData.add(new ScoreDto(topscore_id, name, score, datetime2));
                 }
                 statement.close();
                 return scoreData;
@@ -123,7 +123,7 @@ public class ScoreRepo {
         return null;
     }
 
-    public List<ScoreData> SearchScores(String search) {
+    public List<ScoreDto> SearchScores(String search) {
         //logger.debug("SearchScores");
         //logger.debug("search: " + search);
 
@@ -133,7 +133,7 @@ public class ScoreRepo {
             try (Connection connection = DriverManager.getConnection(datasource_connection, datasource_user, datasource_password)) {
                 PreparedStatement stmt = null;
 
-                List<ScoreData> scoreData = new ArrayList<>();
+                List<ScoreDto> scoreData = new ArrayList<>();
 
                 //logger.debug("Database connected");
                 String query = "SELECT * FROM topscore where name LIKE ? OR score LIKE ? ORDER BY score LIMIT 100";
@@ -150,7 +150,7 @@ public class ScoreRepo {
                     String score = rs.getString("score");
                     Date datetime = rs.getTimestamp("datetime");
                     String datetime2 = datetime.toString();
-                    scoreData.add(new ScoreData(topscore_id, name, score, datetime2));
+                    scoreData.add(new ScoreDto(topscore_id, name, score, datetime2));
                 }
                 stmt.close();
                 return scoreData;
