@@ -24,9 +24,9 @@ public class TopScore {
         List<ScoreDto> scoreDto;
 
         if (search.isPresent()) {
-            scoreData = scoreRepo.SearchScores(search.get());
+            scoreDto = scoreRepo.SearchScores(search.get());
         } else {
-            scoreData = scoreRepo.SelectScores();
+            scoreDto = scoreRepo.SelectScores();
         }
 
         ObjectMapper mapper = new ObjectMapper();
