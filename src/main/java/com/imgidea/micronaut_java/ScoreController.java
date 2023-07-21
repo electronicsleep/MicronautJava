@@ -13,9 +13,9 @@ import java.util.Optional;
 import java.util.List;
 
 @Controller("/")
-public class TopScore {
+public class ScoreController {
 
-    private static Logger logger = LoggerFactory.getLogger(TopScore.class);
+    private static Logger logger = LoggerFactory.getLogger(ScoreController.class);
     @Get("/top-score")
     public HttpResponse TopScore(HttpRequest request, Optional<String> search ) {
         logger.info("Endpoint: /top-score search " + search);
