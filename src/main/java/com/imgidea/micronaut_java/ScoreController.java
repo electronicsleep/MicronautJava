@@ -17,7 +17,7 @@ public class ScoreController {
 
     private static Logger logger = LoggerFactory.getLogger(ScoreController.class);
     @Get("/top-score")
-    public HttpResponse TopScore(HttpRequest request, Optional<String> search ) {
+    public HttpResponse ScoreController(HttpRequest request, Optional<String> search ) {
         logger.info("Endpoint: /top-score search " + search);
 
         ScoreRepo scoreRepo = new ScoreRepo();
