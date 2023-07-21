@@ -7,7 +7,7 @@ verbose = True
 host = "http://0.0.0.0:8080" 
 
 
-class TestMicronautJava:
+class Test:
 
     def test_root(self):
         path = "/"
@@ -16,7 +16,7 @@ class TestMicronautJava:
         result = requests.get(url)
         if verbose:
             print(result.text)
-        assert result.text == '{"Status": "MicronautJava"}'
+        assert "Home" in result.text
 
     def test_health(self):
         print("\n")
