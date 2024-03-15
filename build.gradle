@@ -1,9 +1,10 @@
 plugins {
-    id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("io.micronaut.application") version "3.3.2"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("io.micronaut.application") version "4.0.3"
+    id("io.micronaut.aot") version "4.0.3"
 }
 
-version = "0.2"
+version = "0.3"
 group = "com.imgidea.micronaut_java"
 
 repositories {
@@ -11,13 +12,19 @@ repositories {
 }
 
 dependencies {
+    annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
+    implementation("io.micronaut.serde:micronaut-serde-jackson")
+    runtimeOnly("ch.qos.logback:logback-classic")
+    testImplementation("io.micronaut:micronaut-http-client")
+    runtimeOnly("org.yaml:snakeyaml")
+
     annotationProcessor("io.micronaut:micronaut-http-validation")
     annotationProcessor("io.micronaut.openapi:micronaut-openapi")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-jackson-databind")
     implementation("io.micronaut:micronaut-runtime")
     implementation("jakarta.annotation:jakarta.annotation-api")
-    implementation("io.micronaut:micronaut-validation")
+    //implementation("io.micronaut:micronaut-validation")
 
     // Swagger
     implementation("io.swagger.core.v3:swagger-annotations")
@@ -29,18 +36,28 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:{junitVersion}")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:{junitVersion}")
 
+    //compile 'org.neo4j.driver:neo4j-java-driver:5.10.0'
+    //implementation "io.micronaut.configuration:micronaut-neo4j-bolt"
+    implementation("org.neo4j.driver:neo4j-java-driver:5.10.0")
+
+
+    //implementation("io.micronaut:micronaut-neo4j-bolt")
+
+
+
+    //testRuntime "org.neo4j.test:neo4j-harness"
+
     implementation("mysql:mysql-connector-java:8.0.16")
 
     runtimeOnly("ch.qos.logback:logback-classic")
 }
 
-
 application {
     mainClass.set("com.imgidea.micronaut_java.Application")
 }
 java {
-    sourceCompatibility = JavaVersion.toVersion("11")
-    targetCompatibility = JavaVersion.toVersion("11")
+    sourceCompatibility = JavaVersion.toVersion("17")
+    targetCompatibility = JavaVersion.toVersion("17")
 }
 
 graalvmNative.toolchainDetection = false
@@ -50,6 +67,17 @@ micronaut {
     processing {
         incremental(true)
         annotations("com.imgidea.micronaut_java.*")
+    }
+    aot {
+        // Please review carefully the optimizations enabled below
+        // Check https://micronaut-projects.github.io/micronaut-aot/latest/guide/ for more details
+        optimizeServiceLoading = false
+        convertYamlToJava = false
+        precomputeOperations = true
+        cacheEnvironment = true
+        optimizeClassLoading = true
+        deduceEnvironment = true
+        optimizeNetty = true
     }
 }
 
