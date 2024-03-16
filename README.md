@@ -1,11 +1,19 @@
 # MicronautJava
 
-MicronautJava is a simple top score REST API/APP will write name/score to a SQL database, it's an example project to show Micronaut with pytest.
+MicronautJava is a simple top score REST API/APP will write name/score to a SQL database
 
-Setup
+Example project to show Micronaut with pytest.
+
+Why Micronaut: Fast startup and builds
+
+Setup MacOS
 ```
-brew install java11
-brew install gradle
+brew install openjdk@17 gradle
+```
+
+Setup Linux
+```
+apt-get install openjdk-17-jdk gradle
 ```
 
 Database

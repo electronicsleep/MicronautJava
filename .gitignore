@@ -2,3 +2,4 @@ build/
 .gradle/
 src/main/resources/overrides.properties
 src/test/pytest/__pycache__/
+gradle/wrapper/gradle-wrapper.jar
