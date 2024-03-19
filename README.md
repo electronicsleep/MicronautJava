@@ -4,7 +4,13 @@ MicronautJava is a simple top score REST API/APP will write name/score to a SQL 
 
 Example project to show Micronaut with pytest.
 
-Why Micronaut: Fast startup and builds
+Why Micronaut: Fast startup, builds, cloudnative
+
+Use SDKman: https://sdkman.io/
+```
+sdk install java 17.0.8-tem
+sdk use java 17.0.8-tem
+```
 
 Setup MacOS
 ```
