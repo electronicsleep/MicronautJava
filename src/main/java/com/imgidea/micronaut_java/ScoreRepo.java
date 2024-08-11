@@ -1,53 +1,55 @@
 package com.imgidea.micronaut_java;
 
-import java.util.Date;
-import java.util.List;
-import java.util.ArrayList;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ScoreRepo {
 
     private static Logger logger = LoggerFactory.getLogger(ScoreRepo.class);
 
     ServiceConfig serviceConfig = new ServiceConfig();
-    String datasource_connection = serviceConfig.getConfig("datasource_connection");
+    String datasource_connection = serviceConfig.getConfig(
+        "datasource_connection"
+    );
     String datasource_password = serviceConfig.getConfig("datasource_password");
     String datasource_user = serviceConfig.getConfig("datasource_user");
 
     public String ScoreAdd(String name, String score, String datetime) {
-        logger.debug("AddEvent: name " + name + " score " + score + " datetime " + datetime);
         String result = "";
 
-        //logger.debug("datasource_connection:" + datasource_connection);
-
         if (datasource_connection != null) {
-
-            try (Connection connection = DriverManager.getConnection(datasource_connection, datasource_user, datasource_password)) {
-                //logger.debug("Database connected");
+            try (
+                Connection connection = DriverManager.getConnection(
+                    datasource_connection,
+                    datasource_user,
+                    datasource_password
+                )
+            ) {
                 String query = "";
                 PreparedStatement stmt = null;
                 int insertResult;
 
                 if (datetime == null) {
-                    query = "INSERT INTO topscore (topscore_id, name, score, datetime) values (UUID(), ?, ?, NOW())";
+                    query =
+                        "INSERT INTO topscore (topscore_id, name, score, datetime) values (UUID(), ?, ?, NOW())";
                     stmt = connection.prepareStatement(query);
                     stmt.setString(1, name);
                     stmt.setString(2, score);
                     insertResult = stmt.executeUpdate();
-                    //logger.debug(query);
                     result = "Inserting score row";
                     logger.debug("Executed query insertResult" + insertResult);
                 } else {
-                    query = "SELECT * FROM topscore WHERE name=? AND score=? AND datetime=?";
+                    query =
+                        "SELECT * FROM topscore WHERE name=? AND score=? AND datetime=?";
                     logger.debug(query);
                     stmt = connection.prepareStatement(query);
 
@@ -63,7 +65,8 @@ public class ScoreRepo {
                         logger.info("Not adding score, already exists");
                         return "Duplicate score";
                     }
-                    query = "INSERT INTO topscore (topscore_id, name, score, datetime) values (UUID(), ?, ?, ?)";
+                    query =
+                        "INSERT INTO topscore (topscore_id, name, score, datetime) values (UUID(), ?, ?, ?)";
                     stmt = connection.prepareStatement(query);
                     stmt.setString(1, name);
                     stmt.setString(2, score);
@@ -74,7 +77,6 @@ public class ScoreRepo {
 
                     logger.debug("Executed insertResult", insertResult);
                 }
-
             } catch (SQLException e) {
                 logger.error("ERROR: AddScore dt: " + e);
                 result = "ERROR inserting";
@@ -86,21 +88,21 @@ public class ScoreRepo {
     }
 
     public List<ScoreDto> SelectScores() {
-        //logger.debug("SelectScores");
-
         List<ScoreDto> scoreData = new ArrayList<>();
 
         if (datasource_connection != null) {
-            //logger.debug("Connecting database...");
-
-            try (Connection connection = DriverManager.getConnection(datasource_connection, datasource_user, datasource_password)) {
-                //logger.debug("Database connected");
+            try (
+                Connection connection = DriverManager.getConnection(
+                    datasource_connection,
+                    datasource_user,
+                    datasource_password
+                )
+            ) {
                 Statement statement = null;
                 statement = connection.createStatement();
-                String query = "SELECT * FROM topscore ORDER BY score DESC, datetime DESC LIMIT 100";
-                //logger.debug("query: " + query);
+                String query =
+                    "SELECT * FROM topscore ORDER BY score DESC, datetime DESC LIMIT 100";
                 ResultSet rs = statement.executeQuery(query);
-
 
                 while (rs.next()) {
                     String topscore_id = rs.getString("topscore_id");
@@ -108,15 +110,19 @@ public class ScoreRepo {
                     String score = rs.getString("score");
                     Date datetime = rs.getTimestamp("datetime");
                     String datetime2 = datetime.toString();
-                    scoreData.add(new ScoreDto(topscore_id, name, score, datetime2));
+                    scoreData.add(
+                        new ScoreDto(topscore_id, name, score, datetime2)
+                    );
                 }
                 statement.close();
                 return scoreData;
             } catch (SQLException e) {
                 logger.error("ERROR: SelectScores: " + e);
-                throw new IllegalStateException("ERROR: SQL SelectScores Query failed", e);
+                throw new IllegalStateException(
+                    "ERROR: SQL SelectScores Query failed",
+                    e
+                );
             }
-
         } else {
             logger.error("ERROR: No database endpoint configured");
         }
@@ -124,21 +130,24 @@ public class ScoreRepo {
     }
 
     public List<ScoreDto> SearchScores(String search) {
-        //logger.debug("SearchScores");
-        //logger.debug("search: " + search);
+        logger.debug("SearchScores");
+        logger.debug("search: " + search);
 
         if (datasource_connection != null) {
-            //logger.debug("Connecting database...");
-
-            try (Connection connection = DriverManager.getConnection(datasource_connection, datasource_user, datasource_password)) {
+            try (
+                Connection connection = DriverManager.getConnection(
+                    datasource_connection,
+                    datasource_user,
+                    datasource_password
+                )
+            ) {
                 PreparedStatement stmt = null;
 
                 List<ScoreDto> scoreData = new ArrayList<>();
 
-                //logger.debug("Database connected");
-                String query = "SELECT * FROM topscore where name LIKE ? OR score LIKE ? ORDER BY score LIMIT 100";
+                String query =
+                    "SELECT * FROM topscore where name LIKE ? OR score LIKE ? ORDER BY score LIMIT 100";
                 search = "%" + search + "%";
-                //logger.debug("DEBUG query" + query);
                 stmt = connection.prepareStatement(query);
                 stmt.setString(1, search);
                 stmt.setString(2, search);
@@ -150,18 +159,18 @@ public class ScoreRepo {
                     String score = rs.getString("score");
                     Date datetime = rs.getTimestamp("datetime");
                     String datetime2 = datetime.toString();
-                    scoreData.add(new ScoreDto(topscore_id, name, score, datetime2));
+                    scoreData.add(
+                        new ScoreDto(topscore_id, name, score, datetime2)
+                    );
                 }
                 stmt.close();
                 return scoreData;
             } catch (SQLException e) {
                 throw new IllegalStateException("ERROR SQL SearchScores:" + e);
             }
-
         } else {
             logger.error("ERROR: no database endpoint configured");
         }
         return null;
     }
 }
-
