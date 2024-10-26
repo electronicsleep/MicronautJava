@@ -39,9 +39,9 @@ datasource_user=infradb
 Run
 ```
 ./gradlew run
-curl localhost:8080
-curl localhost:8080/health
-curl localhost:8080/top-score | jq .
+curl localhost:8081
+curl localhost:8081/health
+curl localhost:8081/top-score | jq .
 ```
 
 Tests
@@ -52,7 +52,7 @@ bash src/test/pytest.sh
 
 # Swagger
 
-http://localhost:8080/swagger-ui
+http://localhost:8081/swagger-ui
 
 # Micronaut
 
