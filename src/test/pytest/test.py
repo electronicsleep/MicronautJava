@@ -4,7 +4,7 @@ import json
 import requests
 
 verbose = True
-host = "http://0.0.0.0:8080" 
+host = "http://0.0.0.0:8081" 
 
 
 class Test:
