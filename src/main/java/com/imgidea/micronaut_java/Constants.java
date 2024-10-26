@@ -5,7 +5,7 @@ public final class Constants {
     public static final String HTML_HEADER =
         "<!DOCTYPE html>\n<html lang=\"en\">\n<body>";
     public static final String HEADER_LINKS =
-        "<a href=\"/\">Home</a> <a href=\"/top-score\">TopScore</a> <br>\n";
+        "<a href=\"/\">Home</a> <a href=\"/top-score\">TopScore</a> <a href=\"/score-board\">ScoreBoard</a> <br>\n";
     public static final String HTML_FOOTER = "\n</body>\n</html>\n";
     public static final String ABOUT = "MicronautJava";
     public static final String ART =
