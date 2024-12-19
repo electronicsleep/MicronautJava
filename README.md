@@ -8,8 +8,8 @@ Why Micronaut: Fast startup, builds, cloudnative
 
 Use SDKman: https://sdkman.io/
 ```
-sdk install java 17.0.8-tem
-sdk use java 17.0.8-tem
+sdk install java 21.0.5-tem
+sdk use java 21.0.5-tem
 ```
 
 Setup MacOS
